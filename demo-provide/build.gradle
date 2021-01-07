@@ -1,0 +1,104 @@
+import org.gradle.api.tasks.compile.JavaCompile
+import org.gradle.api.tasks.javadoc.Javadoc
+import org.gradle.api.tasks.testing.Test
+
+buildscript {
+    ext {
+        springBootVersion = '2.3.2.RELEASE'
+        springBootAdminVersion = '2.1.5'
+        springCloudVersion = 'Hoxton.SR5'
+    }
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+plugins {
+    id "org.sonarqube" version "2.7"
+}
+
+apply plugin: 'java'
+apply plugin: "org.springframework.boot"
+apply plugin: 'io.spring.dependency-management'
+
+group 'com.demo.provide'
+version '1.0.0'
+
+
+sourceCompatibility = 13
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+javadoc.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+tasks.withType(Javadoc) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Test) {
+    systemProperty "file.encoding", "UTF-8"
+}
+
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.springframework.boot:spring-boot-starter-actuator')
+    implementation('org.springframework.boot:spring-boot-starter-test')
+    implementation('org.apache.httpcomponents:httpclient:4.5.3')
+    implementation('org.jolokia:jolokia-core')
+
+    //mq
+    implementation('org.springframework.boot:spring-boot-starter-amqp')
+
+    //lombok
+    implementation('org.projectlombok:lombok:1.18.12')
+    annotationProcessor('org.projectlombok:lombok:1.18.12')
+
+    //    Spring cloud
+    implementation('org.springframework.cloud:spring-cloud-starter-consul-discovery')
+    implementation('org.springframework.cloud:spring-cloud-starter-openfeign')
+    implementation('org.springframework.cloud:spring-cloud-starter-bus-amqp')
+
+    // Prometheus
+    compile('io.micrometer:micrometer-core:1.5.1')
+    compile('io.micrometer:micrometer-registry-prometheus:1.5.1')
+
+    //service
+    compile('com.demo.service:demo-service:1.0.0')
+}
+
+
+test {
+    exclude 'com/**'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
