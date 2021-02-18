@@ -23,6 +23,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableBinding(value = {DemoClientInputProtocol.class, DemoClientOutputProtocol.class, SingleIOutputProtocol.class})
 public class DemoClientApplication {
 
+
 	public static void main(String[] args) {
 		new SpringApplicationBuilder().environment(new StandardEncryptableEnvironment())
 				.sources(DemoClientApplication.class).run(args);
