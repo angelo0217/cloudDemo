@@ -86,10 +86,6 @@ dependencies {
     //mq
     implementation('org.springframework.boot:spring-boot-starter-amqp')
 
-    //logback to kafka
-//    implementation('org.apache.kafka:kafka-clients')
-//    implementation('com.github.danielwegener:logback-kafka-appender:0.2.0-RC1')
-
     implementation('io.swagger:swagger-annotations:1.5.22')
     implementation('io.swagger:swagger-models:1.5.22')
     compile 'cglib:cglib:3.3.0'
@@ -127,6 +123,9 @@ dependencies {
 
     //service
     compile('com.demo.service:demo-service:1.0.0')
+
+    implementation group: 'io.github.resilience4j', name: 'resilience4j-spring-cloud2', version: '1.4.0'
+
 }
 
 

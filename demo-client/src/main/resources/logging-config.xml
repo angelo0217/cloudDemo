@@ -14,23 +14,23 @@
         </encoder>
     </appender>
 
-    <appender name="KAFKA" class="com.github.danielwegener.logback.kafka.KafkaAppender">
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%d{yyyy-MM-dd HH:mm:ss}[%ip][%t] %-5level [%c{0}] %m%n</pattern>
-        </encoder>
+<!--    <appender name="KAFKA" class="com.github.danielwegener.logback.kafka.KafkaAppender">-->
+<!--        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">-->
+<!--            <pattern>%d{yyyy-MM-dd HH:mm:ss}[%ip][%t] %-5level [%c{0}] %m%n</pattern>-->
+<!--        </encoder>-->
 
-        <topic>demo-client</topic>
-        <keyingStrategy class="com.github.danielwegener.logback.kafka.keying.NoKeyKeyingStrategy" />
-        <deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy" />
+<!--        <topic>demo-client</topic>-->
+<!--        <keyingStrategy class="com.github.danielwegener.logback.kafka.keying.NoKeyKeyingStrategy" />-->
+<!--        <deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy" />-->
 
-        <producerConfig>bootstrap.servers=demo-kafka:9092</producerConfig>
-        <producerConfig>acks=0</producerConfig>
-        <producerConfig>linger.ms=100</producerConfig>
-        <producerConfig>max.block.ms=100</producerConfig>
-        <producerConfig>max.block.ms=0</producerConfig>
-        <producerConfig>client.id=${HOSTNAME}-${CONTEXT_NAME}-logback-relaxed</producerConfig>
+<!--        <producerConfig>bootstrap.servers=demo-kafka:9092</producerConfig>-->
+<!--        <producerConfig>acks=0</producerConfig>-->
+<!--        <producerConfig>linger.ms=100</producerConfig>-->
+<!--        <producerConfig>max.block.ms=100</producerConfig>-->
+<!--        <producerConfig>max.block.ms=0</producerConfig>-->
+<!--        <producerConfig>client.id=${HOSTNAME}-${CONTEXT_NAME}-logback-relaxed</producerConfig>-->
 
-    </appender>
+<!--    </appender>-->
 
     <appender name="DEMO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${HOME_LOG}</file>
@@ -53,13 +53,13 @@
     <logger name="com.demo.client" level="DEBUG" additivity="false">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="DEMO_FILE"/>
-        <appender-ref ref="KAFKA"/>
+<!--        <appender-ref ref="KAFKA"/>-->
     </logger>
 
     <logger name="org.springframework" level="INFO" additivity="false">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="DEMO_FILE"/>
-        <appender-ref ref="KAFKA"/>
+<!--        <appender-ref ref="KAFKA"/>-->
     </logger>
 
     <root level="INFO" additivity="false">
