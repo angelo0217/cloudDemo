@@ -3,6 +3,7 @@ package com.demo.client;
 import com.demo.client.config.stream.DemoClientInputProtocol;
 import com.demo.client.config.stream.DemoClientOutputProtocol;
 import com.demo.client.config.stream.SingleIOutputProtocol;
+import com.demo.service.EnableDemoService;
 import com.ulisesbocchio.jasyptspringboot.environment.StandardEncryptableEnvironment;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -20,6 +21,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @RefreshScope
 @EnableAsync
 @EnableSwagger2
+@EnableDemoService
 @EnableBinding(value = {DemoClientInputProtocol.class, DemoClientOutputProtocol.class, SingleIOutputProtocol.class})
 public class DemoClientApplication {
 
