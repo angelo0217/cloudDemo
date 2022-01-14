@@ -17,19 +17,19 @@ import org.springframework.util.MimeTypeUtils;
 @Service
 public class SingleProducer {
     
-    @Autowired
-    @Output(SingleIOutputProtocol.OUT_PUT)
-    private MessageChannel demoClientChannel;
-
-    public void send(SingleModel singleModel){
-        try {
-            log.debug(">>>>> send message stream :{}", JsonUtil.objectToJson(singleModel));
-            demoClientChannel.send(MessageBuilder.withPayload(singleModel)
-                    .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON).build());
-        } catch (Exception ex){
-            log.error("send message stream error {}", JsonUtil.objectToJson(singleModel), ex);
-        }
-    }
+//    @Autowired
+//    @Output(SingleIOutputProtocol.OUT_PUT)
+//    private MessageChannel demoClientChannel;
+//
+//    public void send(SingleModel singleModel){
+//        try {
+//            log.debug(">>>>> send message stream :{}", JsonUtil.objectToJson(singleModel));
+//            demoClientChannel.send(MessageBuilder.withPayload(singleModel)
+//                    .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON).build());
+//        } catch (Exception ex){
+//            log.error("send message stream error {}", JsonUtil.objectToJson(singleModel), ex);
+//        }
+//    }
 
 
 }

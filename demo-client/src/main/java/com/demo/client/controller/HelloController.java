@@ -32,18 +32,18 @@ public class HelloController {
 
     @GetMapping("/send")
     public String send(){
-        SingleModel singleModel = new SingleModel();
-        singleModel.setData("from client");
-        singleProducer.send(singleModel);
+        DemoClientStreamVo demoClientStreamVo = new DemoClientStreamVo();
+        demoClientStreamVo.setWord("1234");
+        clientProducer.send(demoClientStreamVo);
         return "ok";
     }
 
     @GetMapping("/single")
     public String single(){
-        DemoClientStreamVo demoClientStreamVo = new DemoClientStreamVo();
-        demoClientStreamVo.setWord("1234");
+        SingleModel singleModel = new SingleModel();
+        singleModel.setData("from client");
 
-        clientProducer.send(demoClientStreamVo);
+//        singleProducer.send(singleModel);
         return "ok";
     }
 

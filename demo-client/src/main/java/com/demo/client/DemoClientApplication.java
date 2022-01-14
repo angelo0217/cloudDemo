@@ -22,7 +22,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableAsync
 @EnableSwagger2
 @EnableDemoService
-@EnableBinding(value = {DemoClientInputProtocol.class, DemoClientOutputProtocol.class, SingleIOutputProtocol.class})
+//@EnableBinding(value = {DemoClientInputProtocol.class, DemoClientOutputProtocol.class, SingleIOutputProtocol.class})
 public class DemoClientApplication {
 
 

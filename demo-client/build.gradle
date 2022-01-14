@@ -1,28 +1,21 @@
-buildscript {
-    ext {
-        springBootVersion = '2.3.2.RELEASE'
-        springBootAdminVersion = '2.1.5'
-        springCloudVersion = 'Hoxton.SR5'
-    }
-    repositories {
-        mavenCentral()
-        mavenLocal()
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-    }
-}
-
 plugins {
-    id "org.sonarqube" version "2.7"
+    id 'org.springframework.boot' version '2.4.6'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
 }
 
-apply plugin: 'java'
-apply plugin: "org.springframework.boot"
-apply plugin: 'io.spring.dependency-management'
+ext {
+    set('springCloudVersion', "2020.0.3")
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+}
+
 
 group 'com.demo.client'
 version '1.0.0'
@@ -33,11 +26,6 @@ sourceCompatibility = 13
 repositories {
     mavenCentral()
 }
-
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-}
-
 
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
@@ -86,17 +74,12 @@ dependencies {
     //mq
     implementation('org.springframework.boot:spring-boot-starter-amqp')
 
-    implementation('io.swagger:swagger-annotations:1.5.22')
-    implementation('io.swagger:swagger-models:1.5.22')
-    compile 'cglib:cglib:3.3.0'
-    implementation('com.github.ulisesbocchio:jasypt-spring-boot-starter:2.1.1')
-
     implementation('com.google.guava:guava:23.0')
     implementation('org.apache.commons:commons-lang3:3.9')
 
     //swagger
     implementation('io.springfox:springfox-swagger2:2.9.2')
-    implementation('com.github.xiaoymin:swagger-bootstrap-ui:1.9.0')
+    implementation('com.github.xiaoymin:swagger-bootstrap-ui:1.9.6')
 
     //jsaypt 加密
     implementation('com.github.ulisesbocchio:jasypt-spring-boot-starter:2.1.1')
@@ -106,8 +89,8 @@ dependencies {
     annotationProcessor('org.projectlombok:lombok:1.18.12')
 
     //    Spring cloud
+    implementation('org.springframework.cloud:spring-cloud-starter-bootstrap')
     implementation('org.springframework.cloud:spring-cloud-starter-consul-discovery')
-//    implementation('org.springframework.cloud:spring-cloud-starter-config')
     implementation('org.springframework.cloud:spring-cloud-starter-openfeign')
     implementation('org.springframework.cloud:spring-cloud-starter-bus-amqp')
 
@@ -117,9 +100,6 @@ dependencies {
     implementation('org.apache.commons:commons-lang3:3.9')
     implementation("org.apache.commons:commons-pool2")
 
-    // Prometheus
-    compile('io.micrometer:micrometer-core:1.5.1')
-    compile('io.micrometer:micrometer-registry-prometheus:1.5.1')
 
     //service
     compile('com.demo.service:demo-service:1.0.0')
