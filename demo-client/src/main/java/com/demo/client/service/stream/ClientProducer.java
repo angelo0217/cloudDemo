@@ -4,7 +4,6 @@ import com.demo.client.model.DemoClientStreamVo;
 import com.demo.service.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.function.StreamBridge;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -13,26 +12,13 @@ import javax.annotation.Resource;
 @Slf4j
 @Service
 public class ClientProducer {
-    
-//    @Autowired
-//    @Output(DemoClientOutputProtocol.OUT_PUT)
-//    private MessageChannel demoClientChannel;
-//
-//    public void send(DemoClientStreamVo demoClientStreamVo){
-//        try {
-//            log.debug(">>>>> send message stream :{}", JsonUtil.objectToJson(demoClientStreamVo));
-//            demoClientChannel.send(MessageBuilder.withPayload(demoClientStreamVo)
-//                    .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON).build());
-//        } catch (Exception ex){
-//            log.error("send message stream error {}", JsonUtil.objectToJson(demoClientStreamVo), ex);
-//        }
-//    }
 
     @Resource
     private StreamBridge streamBridge;
 
     public void send(DemoClientStreamVo demoClientStreamVo) {
-        System.out.println("~~~~~~~~~~~~~~~~~~~");
-        streamBridge.send("client-out-0", JsonUtil.objectToJson(demoClientStreamVo));
+//        可用 sender-out-0 指定到設定党內的設定，或是直接送topic key: test-message
+//         streamBridge.send("test-message", JsonUtil.objectToJson(demoClientStreamVo));
+        streamBridge.send("sender-out-0", JsonUtil.objectToJson(demoClientStreamVo));
     }
 }

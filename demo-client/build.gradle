@@ -92,8 +92,9 @@ dependencies {
     implementation('org.springframework.cloud:spring-cloud-starter-bootstrap')
     implementation('org.springframework.cloud:spring-cloud-starter-consul-discovery')
     implementation('org.springframework.cloud:spring-cloud-starter-openfeign')
-    implementation('org.springframework.cloud:spring-cloud-starter-bus-amqp')
-
+//    implementation('org.springframework.cloud:spring-cloud-starter-bus-amqp')
+    implementation("org.springframework.cloud:spring-cloud-stream")
+    implementation('org.springframework.cloud:spring-cloud-starter-stream-rabbit')
     // Jwt
     implementation('io.jsonwebtoken:jjwt:0.9.1')
     implementation('org.apache.httpcomponents:httpclient:4.5.3')

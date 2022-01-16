@@ -4,19 +4,18 @@ package com.demo.client.service.stream;
 import com.demo.client.model.DemoClientStreamVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.function.Consumer;
 
-
 @Slf4j
-@Service
+@Component
 public class ClientConsumer {
 
     @Bean
-    public Consumer<DemoClientStreamVo> client_in() {
-        return str -> {
-            log.info("~~~~~~~~~~~~~~" + str);
+    public Consumer<DemoClientStreamVo> msg(){
+        return demoClientStreamVo -> {
+            System.out.println(demoClientStreamVo.getWord());
         };
     }
 }
