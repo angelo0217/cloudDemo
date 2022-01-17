@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '2.4.6'
+        springBootVersion = '2.5.8'
         baseProjectName = "demo-service"
     }
 }
@@ -55,11 +55,11 @@ dependencies {
     implementation('org.java-websocket:Java-WebSocket:1.4.0')
     implementation('org.projectlombok:lombok:1.18.12')
     annotationProcessor('org.projectlombok:lombok:1.18.12')
-    implementation('org.springframework.retry:spring-retry:1.2.5.RELEASE')
-    implementation("org.springframework.cloud:spring-cloud-starter-openfeign:3.0.3")
-    implementation('org.springframework.cloud:spring-cloud-starter-consul-discovery:3.0.3')
-    implementation('org.springframework.cloud:spring-cloud-stream:3.1.3')
-    implementation("org.springframework.integration:spring-integration-redis:5.4.7")
+    implementation('org.springframework.retry:spring-retry:1.3.1')
+    implementation("org.springframework.cloud:spring-cloud-starter-openfeign:3.0.4")
+    implementation('org.springframework.cloud:spring-cloud-starter-consul-discovery:3.0.4')
+    implementation('org.springframework.cloud:spring-cloud-stream:3.1.4')
+    implementation("org.springframework.integration:spring-integration-redis:5.5.7")
     implementation("io.github.resilience4j:resilience4j-annotations:1.7.1")
 }
 
