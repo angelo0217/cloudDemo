@@ -1,82 +1,65 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'https://repo.spring.io/milestone' }
+    }
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:3.0.0-M1'
+    }
+}
+
 plugins {
-    id 'org.springframework.boot' version '2.5.8'
+//	id 'org.springframework.boot' version '3.0.0-M1'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
 
 ext {
-    set('springCloudVersion', "2020.0.4")
+    set('springCloudVersion', "2022.0.0-M1")
 }
 
+apply plugin: 'org.springframework.boot'
+group 'com.demo.provide'
+version '1.0.0'
+sourceCompatibility = '17'
+
 repositories {
-    mavenCentral()
     mavenLocal()
+    mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
     maven {
         url "https://plugins.gradle.org/m2/"
     }
-}
-
-
-group 'com.demo.provide'
-version '1.0.0'
-
-
-sourceCompatibility = 13
-
-repositories {
-    mavenCentral()
-}
-
-compileJava.options.encoding = "UTF-8"
-compileTestJava.options.encoding = "UTF-8"
-javadoc.options.encoding = 'UTF-8'
-
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
-}
-
-tasks.withType(Javadoc) {
-    options.encoding = 'UTF-8'
-}
-
-tasks.withType(Test) {
-    systemProperty "file.encoding", "UTF-8"
-}
-
-
-repositories {
-    mavenCentral()
-    mavenLocal()
 }
 
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-web')
     implementation('org.springframework.boot:spring-boot-starter-actuator')
     implementation('org.springframework.boot:spring-boot-starter-test')
-    implementation('org.apache.httpcomponents:httpclient:4.5.3')
-    implementation('org.jolokia:jolokia-core')
+    implementation('org.apache.httpcomponents:httpclient:4.5.13')
+    implementation('org.jolokia:jolokia-core:1.7.1')
 
     //mq
     implementation('org.springframework.boot:spring-boot-starter-amqp')
 
     //lombok
-    implementation('org.projectlombok:lombok:1.18.12')
-    annotationProcessor('org.projectlombok:lombok:1.18.12')
+    implementation('org.projectlombok:lombok:1.18.22')
+    annotationProcessor('org.projectlombok:lombok:1.18.22')
 
     //    Spring cloud
     implementation('org.springframework.cloud:spring-cloud-starter-bootstrap')
     implementation('org.springframework.cloud:spring-cloud-starter-consul-discovery')
     implementation('org.springframework.cloud:spring-cloud-starter-openfeign')
-//    implementation('org.springframework.cloud:spring-cloud-starter-bus-amqp')
     implementation("org.springframework.cloud:spring-cloud-stream")
     implementation('org.springframework.cloud:spring-cloud-starter-stream-rabbit')
+    implementation('org.springframework.retry:spring-retry')
     //service
-    compile('com.demo.service:demo-service:1.0.0')
+    implementation('com.demo.service:demo-service:1.0.0')
 }
 
 
-test {
-    exclude 'com/**'
+tasks.named('test') {
+    useJUnitPlatform()
 }
 
 dependencyManagement {
