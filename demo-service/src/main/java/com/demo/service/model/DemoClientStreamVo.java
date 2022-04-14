@@ -1,4 +1,4 @@
-package com.demo.client.model;
+package com.demo.service.model;
 
 import lombok.Data;
 

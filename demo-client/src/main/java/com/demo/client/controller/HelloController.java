@@ -1,6 +1,6 @@
 package com.demo.client.controller;
 
-import com.demo.client.model.DemoClientStreamVo;
+import com.demo.service.model.DemoClientStreamVo;
 import com.demo.client.service.integration.TestService;
 import com.demo.client.service.stream.ClientProducer;
 import com.demo.service.model.SingleModel;
