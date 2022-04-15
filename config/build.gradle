@@ -39,12 +39,15 @@ dependencies {
 
     //lombok
     implementation('org.projectlombok:lombok:1.18.22')
+    implementation 'junit:junit:4.13.1'
     annotationProcessor('org.projectlombok:lombok:1.18.22')
 
     //    Spring cloud
     implementation('org.springframework.cloud:spring-cloud-starter-consul-discovery')
     implementation('org.springframework.cloud:spring-cloud-config-server')
 
+    //jsaypt 加密
+    implementation('com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4')
 
     implementation 'org.springframework.boot:spring-boot-configuration-processor'
 }
