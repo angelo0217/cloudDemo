@@ -8,7 +8,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.scheduling.annotation.EnableAsync;
-//import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 @EnableDiscoveryClient
@@ -16,7 +15,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @SpringBootApplication
 @RefreshScope
 @EnableAsync
-//@EnableSwagger2
 @EnableDemoService
 public class DemoClientApplication {
 
