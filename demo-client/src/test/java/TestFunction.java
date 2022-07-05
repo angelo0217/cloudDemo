@@ -5,6 +5,11 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class TestFunction {
+
+    interface IsSameData{
+        boolean isSame(String a, String b);
+    }
+
     @Test
     public void test() {
         Function strLen = t -> {
@@ -26,6 +31,12 @@ public class TestFunction {
         strLen.apply("aaaaa");
         cc.accept("bbbbb");
         System.out.println(isDoubleMax.test("Test"));
+
+        IsSameData isSameData = (a, b) -> {
+            return a.equals(b);
+        };
+
+        System.out.println(isSameData.isSame("A", "A"));
     }
 
 }
