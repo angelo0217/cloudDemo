@@ -18,4 +18,5 @@ public class ClientConsumer {
             System.out.println(demoClientStreamVo.getWord());
         };
     }
+
 }

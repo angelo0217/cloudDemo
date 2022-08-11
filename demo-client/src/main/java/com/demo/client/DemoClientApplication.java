@@ -23,4 +23,5 @@ public class DemoClientApplication {
 		new SpringApplicationBuilder().environment(new StandardEncryptableEnvironment())
 				.sources(DemoClientApplication.class).run(args);
 	}
+
 }
