@@ -1,18 +1,11 @@
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
 import com.demo.client.Const;
 import com.demo.client.DemoClientApplication;
 import com.demo.client.model.UserVo;
-import com.demo.client.service.redis_stream.RedisStream;
+import com.demo.service.model.TestModel;
+import com.demo.service.utils.RedisStream;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -22,8 +15,13 @@ import org.springframework.data.redis.RedisSystemException;
 import org.springframework.data.redis.connection.stream.*;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StreamOperations;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 
 @Slf4j
@@ -128,11 +126,13 @@ public class RedisStreamTest {
                     });
                 }
             });
+        } else {
+            System.out.println(" no pending data");
         }
     }
 
     @Test
-    public void test() {
+    public void testDeleteOkMsg() {
 
         StreamOperations<String, String, String> streamOperations = this.redisTemplate.opsForStream();
 
@@ -142,21 +142,27 @@ public class RedisStreamTest {
                 // 一直阻塞直到获取数据，可能会报超时异常
                 // .block(Duration.ofMillis(0))
                 // 1次获取10个数据
-                .count(10);
-        // 從消費者的pending佇列中讀取訊息
-//        List<MapRecord<String, String, String>>  retVal = streamOperations.read(Consumer.from("group-b","name1"), StreamOffset.create(Const.STREAM_KEY, ReadOffset.from("0")));
-        List<ObjectRecord<String, UserVo>> objectRecords = streamOperations
-                .read(UserVo.class, streamReadOptions, StreamOffset.create(Const.STREAM_KEY, ReadOffset.from("0")));
+                .count(100);
+
+        List<ObjectRecord<String, TestModel>> objectRecords = streamOperations
+                .read(TestModel.class, streamReadOptions, StreamOffset.create(Const.STREAM_KEY, ReadOffset.from("0")));
         // 遍歷訊息
-        for (ObjectRecord<String, UserVo> record : objectRecords ) {
+        for (ObjectRecord<String, TestModel> record : objectRecords ) {
             // 消費訊息
             log.info("訊息id={}, 訊息value={}", record.getId(), record.getValue());
             // 手動ack訊息
-            if(record.getValue() instanceof UserVo){
-                log.info(" is user vo");
+            if(record.getValue() instanceof TestModel){
+                log.info(" is user TestModel: ");
+//                UserVo userVo = (UserVo) record.getValue().getObj();
+//                log.info("user: {}", userVo.getAge());
             }
-//            streamOperations.acknowledge("group-b", record);
-            redisTemplate.opsForStream().acknowledge(record.getStream(),"group-b", record.getId());
+            Range.Bound searchId = Range.Bound.inclusive(record.getId().toString());
+            PendingMessages pendingMessages =  streamOperations.pending(Const.STREAM_KEY, "group-b", Range.of(searchId, searchId), 100);
+            log.info("pendingMessages: {}", pendingMessages);
+            if(pendingMessages.size() == 0){
+                log.info("delete id: {}", record.getId());
+                redisTemplate.opsForStream().delete(Const.STREAM_KEY, record.getId());
+            }
         }
     }
 

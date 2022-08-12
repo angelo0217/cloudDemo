@@ -1,7 +1,8 @@
 package com.demo.client.service.redis_stream;
 
 import com.demo.client.Const;
-import com.demo.client.model.UserVo;
+import com.demo.service.model.SingleModel;
+import com.demo.service.model.StreamModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.stream.ObjectRecord;
 import org.springframework.data.redis.connection.stream.RecordId;
@@ -20,11 +21,14 @@ public class RedisStreamProduce {
     }
 
     public void sendRecord(String test_word) {
-        var userVo = new UserVo(test_word, 10);
+        var single = new SingleModel();
+        single.setData("test");
 
-        ObjectRecord<String, UserVo> record = StreamRecords.newRecord()
+        var streamModel = new StreamModel(test_word, 10, single);
+
+        ObjectRecord<String, ?> record = StreamRecords.newRecord()
                 .in(Const.STREAM_KEY)
-                .ofObject(userVo)
+                .ofObject(streamModel)
                 .withId(RecordId.autoGenerate());
 
         RecordId recordId = redisTemplate.opsForStream()

@@ -46,10 +46,17 @@ dependencies {
     implementation('org.projectlombok:lombok:1.18.22')
     annotationProcessor('org.projectlombok:lombok:1.18.22')
 
+    //redis
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    implementation("org.apache.commons:commons-pool2")
+    implementation("org.springframework.boot:spring-boot-starter-integration")
+    implementation("org.springframework.integration:spring-integration-redis")
+
     //    Spring cloud
     implementation('org.springframework.cloud:spring-cloud-starter-bootstrap')
     implementation('org.springframework.cloud:spring-cloud-starter-consul-discovery')
     implementation('org.springframework.cloud:spring-cloud-starter-openfeign')
+    implementation('org.springframework.cloud:spring-cloud-starter-config')
     implementation("org.springframework.cloud:spring-cloud-stream")
     implementation('org.springframework.cloud:spring-cloud-starter-stream-rabbit')
     implementation('org.springframework.retry:spring-retry')

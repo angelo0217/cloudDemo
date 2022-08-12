@@ -1,4 +1,4 @@
-package com.demo.client.service.redis_stream;
+package com.demo.service.utils;
 
 import io.lettuce.core.RedisBusyException;
 import io.lettuce.core.RedisCommandExecutionException;

@@ -1,5 +1,6 @@
 package com.demo.provide;
 
+import com.demo.service.EnableDemoService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -14,6 +15,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @SpringBootApplication
 @RefreshScope
 @EnableAsync
+@EnableDemoService
 public class DemoProvideApplication {
 
 	public static void main(String[] args) {
