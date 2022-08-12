@@ -44,7 +44,7 @@ public class ListenerMessage implements StreamListener<String, ObjectRecord<Stri
             System.out.println("body is user");
         }
 
-        redisTemplate.opsForStream().acknowledge(message.getStream(),"group-b", message.getId());
-        redisTemplate.opsForStream().delete(message.getStream(), message.getId());// delete id
+//        redisTemplate.opsForStream().acknowledge(message.getStream(),"group-b", message.getId());
+//        redisTemplate.opsForStream().delete(message.getStream(), message.getId());// delete id
     }
 }
