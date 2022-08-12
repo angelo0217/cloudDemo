@@ -1,5 +1,6 @@
 package com.demo.client.controller;
 
+import com.demo.client.service.redis_stream.RedisStreamProduce;
 import com.demo.service.model.DemoClientStreamVo;
 import com.demo.client.service.integration.TestService;
 import com.demo.client.service.stream.ClientProducer;
@@ -14,11 +15,14 @@ public class HelloController {
     private ClientProducer clientProducer;
     private TestService testService;
     private HelloService helloService;
+    private RedisStreamProduce redisStreamProduce;
 
-    public HelloController(ClientProducer clientProducer, TestService testService, HelloService helloService){
+    public HelloController(ClientProducer clientProducer, TestService testService, HelloService helloService,
+                           RedisStreamProduce redisStreamProduce){
         this.clientProducer = clientProducer;
         this.testService = testService;
         this.helloService = helloService;
+        this.redisStreamProduce = redisStreamProduce;
     }
 
     @GetMapping("/hello")
@@ -51,5 +55,11 @@ public class HelloController {
     @GetMapping("/service")
     public String helloService(){
         return helloService.helloService();
+    }
+
+    @GetMapping("/send_redis")
+    public String sendRedisStream() {
+        redisStreamProduce.sendRecord("12344445");
+        return "success";
     }
 }
