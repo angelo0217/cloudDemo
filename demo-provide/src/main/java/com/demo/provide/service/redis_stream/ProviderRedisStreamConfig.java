@@ -33,10 +33,10 @@ public class ProviderRedisStreamConfig {
         StreamMessageListenerContainer listenerContainer = StreamMessageListenerContainer.create(factory,
                 streamMessageListenerContainerOptions);
 
-        redisStream.createGroup(Const.STREAM_KEY, "group-b");
+        redisStream.createGroup(Const.STREAM_KEY, "group-a");
 
         Subscription subscription = listenerContainer.receiveAutoAck(
-                Consumer.from("group-b","name1"),
+                Consumer.from("group-a","name1"),
                 StreamOffset.create(Const.STREAM_KEY, ReadOffset.lastConsumed()),
                 listenerMessage
         );
