@@ -1,4 +1,4 @@
-package com.demo.provide.controller;
+package com.demo.consumer.controller;
 
 import com.demo.service.model.ProduceRes;
 import com.demo.service.model.TestModel;

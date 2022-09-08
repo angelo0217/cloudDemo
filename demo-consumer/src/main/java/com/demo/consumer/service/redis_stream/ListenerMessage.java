@@ -1,4 +1,4 @@
-package com.demo.provide.service.redis_stream;
+package com.demo.consumer.service.redis_stream;
 
 import com.demo.service.model.TestModel;
 import lombok.extern.slf4j.Slf4j;

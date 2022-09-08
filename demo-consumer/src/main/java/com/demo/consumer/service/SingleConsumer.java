@@ -1,4 +1,4 @@
-package com.demo.provide.service;
+package com.demo.consumer.service;
 
 
 import com.demo.service.model.DemoClientStreamVo;

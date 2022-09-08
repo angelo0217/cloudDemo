@@ -1,6 +1,6 @@
-package com.demo.provide.service.redis_stream;
+package com.demo.consumer.service.redis_stream;
 
-import com.demo.provide.Const;
+import com.demo.consumer.Const;
 import com.demo.service.utils.RedisStream;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -14,13 +14,13 @@ import org.springframework.data.redis.stream.Subscription;
 
 @Slf4j
 @Configuration
-public class ProviderRedisStreamConfig {
+public class ConsumerRedisStreamConfig {
 
 
     private ListenerMessage listenerMessage;
     private RedisStream redisStream;
 
-    public ProviderRedisStreamConfig(ListenerMessage listenerMessage, RedisStream redisStream){
+    public ConsumerRedisStreamConfig(ListenerMessage listenerMessage, RedisStream redisStream){
         this.listenerMessage = listenerMessage;
         this.redisStream = redisStream;
     }
