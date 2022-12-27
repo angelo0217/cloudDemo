@@ -19,8 +19,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
 public class DemoClientApplication {
 
 
-	public static void main(String[] args) {
-		new SpringApplicationBuilder().environment(new StandardEncryptableEnvironment())
-				.sources(DemoClientApplication.class).run(args);
-	}
+    public static void main(String[] args) {
+        new SpringApplicationBuilder().environment(new StandardEncryptableEnvironment())
+                .sources(DemoClientApplication.class).run(args);
+    }
 }

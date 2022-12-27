@@ -21,12 +21,19 @@ public class JasyptUtil {
     public static SimpleStringPBEConfig cryptor(String password) {
         SimpleStringPBEConfig config = new SimpleStringPBEConfig();
         config.setPassword(password);
-        config.setSaltGeneratorClassName("org.jasypt.salt.RandomSaltGenerator");
-        config.setStringOutputType("base64");
-        config.setAlgorithm("PBEWithMD5AndDES");
+        /**
+         * PBEWithMD5AndDES, PBEWITHHMACSHA512ANDAES_256
+         */
+        config.setAlgorithm("PBEWITHHMACSHA512ANDAES_256");
         config.setKeyObtentionIterations("1000");
         config.setPoolSize("1");
         config.setProviderName("SunJCE");
+        config.setSaltGeneratorClassName("org.jasypt.salt.RandomSaltGenerator");
+        /**
+         * org.jasypt.iv.NoIvGenerator
+         */
+        config.setIvGeneratorClassName("org.jasypt.iv.RandomIvGenerator");
+        config.setStringOutputType("base64");
         return config;
     }
 }
