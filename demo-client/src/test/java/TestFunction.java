@@ -1,9 +1,13 @@
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+@Slf4j
 public class TestFunction {
 
     interface IsSameData{
@@ -39,4 +43,32 @@ public class TestFunction {
         System.out.println(isSameData.isSame("A", "A"));
     }
 
+
+    @Test
+    public void switchDemo(){
+        Map<String, Object> data = new HashMap<>();
+        data.put("key1", "aaa");
+        data.put("key2", 111);
+        if (data.get("key1") instanceof String s) {
+            log.info(s);
+        }
+
+        switch (data.get("key1")) {
+            case String s  -> log.info(s);
+            case Double d  -> log.info(d.toString());
+            case Integer i -> log.info(i.toString());
+            default        -> log.info("");
+        }
+
+        var word = switch (data.get("key1")) {
+            case String s  -> s;
+            case Double d  -> d.toString();
+            case Integer i -> i.toString();
+            default             -> {
+                System.out.println("The color could not be found.");
+                yield "Unknown Color";
+            }
+        };
+        System.out.println(word);
+    }
 }

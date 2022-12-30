@@ -37,7 +37,9 @@ tasks.withType(Test) {
 apply plugin: 'org.springframework.boot'
 group 'com.demo.client'
 version '1.0.0'
-sourceCompatibility = '17'
+
+sourceCompatibility = JavaVersion.VERSION_17_PREVIEW
+targetCompatibility = JavaVersion.VERSION_17_PREVIEW
 
 repositories {
     mavenLocal()
