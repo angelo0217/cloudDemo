@@ -15,4 +15,8 @@ public class TestService {
     public TestModel getProduceTest(){
         return produceClient.getTestModel().getData();
     }
+
+    public String getTestApo(){
+        return "hello";
+    }
 }
